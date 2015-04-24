@@ -41,7 +41,6 @@ $assetBundle::register($this);
             ],
             'renderInnerContainer' => false,
         ]);
-
         echo Nav::widget([
             'options' => ['class' => 'top-nav navbar-right nav'],
             'items' => Yii::$app->controller->module->menu->toArray(),
