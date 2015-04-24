@@ -46,7 +46,6 @@ $assetBundle::register($this);
             'options' => ['class' => 'top-nav navbar-right nav'],
             'items' => Yii::$app->controller->module->menu->toArray(),
         ]);
-
     ?>
 
     <?php /* Yii's Nav widget doesn't works with SB-Admin sidebar CSS */ ?>
