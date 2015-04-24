@@ -56,10 +56,13 @@ $assetBundle::register($this);
                 <li <?php if(ArrayHelper::getValue($menuItem, 'active/, false')):?>class="active"<?php endif?>>
                 <?php if(!isset($menuItem['items'])):?>
                     <a href="<?=Url::to($menuItem['url'])?>"><?=$menuItem['label']?></a>
-                <?php else:?>
+                <?php else:
+                    $items = isset($menuItem['items']) ? $menuItem['items'] : [];
+                    $in = '';
+                    foreach($items as $item){ if( Url::to($item['url']) == Url::current() ) {$in = ' in';} }
+                    ?>
                     <a href="javascript:;" data-toggle="collapse" data-target="#sidebar-menu<?=$i?>"><?=$menuItem['label']?> <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="sidebar-menu<?=$i?>" class="collapse">
-                        <?php $items = isset($menuItem['items']) ? $menuItem['items'] : []?>
+                    <ul id="sidebar-menu<?=$i?>" class="collapse<?=$in?>">
                         <?php foreach($items as $item):?>
                         <li>
                             <a href="<?=Url::to($item['url'])?>"><?=$item['label']?></a>
