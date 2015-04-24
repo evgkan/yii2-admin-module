@@ -1,8 +1,7 @@
 {
-    "name": "asdf-studio/yii2-admin-module",
+    "name": "evgkan/yii2-admin-module",
     "description": "Admin module for Yii2 framework",
     "license": "BSD-3-Clause",
-    "homepage": "http://asdf-studio.net/docs/yii2-admin-module",
     "type": "yii2-extension",
     "authors": [
         {
@@ -19,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "asdfstudio\\admin\\": ""
+            "evgkan\\admin\\": ""
         }
     },
     "asset-installer-paths": {
