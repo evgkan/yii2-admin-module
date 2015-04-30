@@ -216,9 +216,9 @@ abstract class Entity extends Component
      * Enable only include in array buttons. By default show all.
      *  return [
      *      'create',
-     *      'view',     //under construction
-     *      'update',     //under construction
-     *      'delete',   //half under construction
+     *      'view',
+     *      'update',
+     *      'delete',
      *  ];
      * @return array
      */
