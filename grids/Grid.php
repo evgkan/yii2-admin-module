@@ -58,9 +58,14 @@ class Grid extends GridView
     {
         $entity = \Yii::$app->getRequest()->getQueryParam('entity', null);
         $primaryKey = $this->entity->primaryKey();
+        $template = '';
+        if (in_array('view', $this->entity->buttons())) $template .= '{view}';
+        if (in_array('update', $this->entity->buttons())) $template .= '{update}';
+        if (in_array('delete', $this->entity->buttons())) $template .= '{delete}';
         return [
             [
                 'class' => ActionColumn::className(),
+                'template' => $template,
                 'buttons' => [
                     'view' => function($url, $model, $key) use ($entity, $primaryKey) {
                         return Html::a(
