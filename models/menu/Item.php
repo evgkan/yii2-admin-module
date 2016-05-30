@@ -3,14 +3,14 @@
 namespace asdfstudio\admin\models\menu;
 
 
-use yii\base\Model;
+use yii\base\Object;
 use yii\helpers\Inflector;
 
 /**
  * Class Item
  * @package asdfstudio\admin\models\menu
  */
-class Item extends Model
+class Item extends Object
 {
     /**
      * Item id. Using for ordering
@@ -56,6 +56,20 @@ class Item extends Model
             ['url', 'safe'],
             ['active', 'safe'],
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function validate()
+    {
+        if(mb_strlen($this->id) < 0 || mb_strlen($this->id) > 255) {
+            return false;
+        }
+        if(mb_strlen($this->label) < 1 || mb_strlen($this->label) > 255) {
+            return false;
+        }
+        return true;
     }
 
     /**
