@@ -63,7 +63,7 @@ abstract class Entity extends Component {
      *
      * @return array
      */
-    public function labels() {
+    public static function labels() {
         $class = new ReflectionClass(static::className());
         $class = $class->getShortName();
 
@@ -80,7 +80,7 @@ abstract class Entity extends Component {
      *
      * @return string
      */
-    public function slug() {
+    public static function slug() {
         return Inflector::slug(static::model());
     }
 
