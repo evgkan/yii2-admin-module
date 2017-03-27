@@ -17,22 +17,30 @@ use yii\web\ForbiddenHttpException;
 
 /**
  * Class ManageController
+ *
  * @package asdfstudio\admin\controllers
  * @property ActiveRecord $model
  */
-class ManageController extends Controller {
+class ManageController extends Controller
+{
     /* @var Entity */
 
     public $entity;
     /* @var ActiveRecord */
     private $_model = null;
 
+    public function actions()
+    {
+        return $this->entity->actions;
+    }
+
     /**
      * @inheritdoc
      * @throws \yii\web\NotFoundHttpException
      */
-    public function init() {
-        $entity = Yii::$app->getRequest()->getQueryParam('entity', null);
+    public function init()
+    {
+        $entity       = Yii::$app->getRequest()->getQueryParam('entity', null);
         $this->entity = $this->getEntity($entity);
         if ($this->entity === null) {
             throw new NotFoundHttpException();
@@ -47,14 +55,15 @@ class ManageController extends Controller {
     /**
      * @inheritdoc
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'allow' => false,
-                        'roles' => ['?']
+                        'roles' => ['?'],
                     ],
                     [
                         'allow' => true,
@@ -65,11 +74,12 @@ class ManageController extends Controller {
         ];
     }
 
-    public function actionIndex($entity) {
+    public function actionIndex($entity)
+    {
         $entity = $this->getEntity($entity);
         if (method_exists($entity, 'canRead') && $entity->canRead()) {
             /* @var ActiveQuery $query */
-            $query = call_user_func([$entity->getModelName(), 'find']);
+            $query     = call_user_func([$entity->getModelName(), 'find']);
             $condition = $entity->getModelConditions();
             if (is_callable($condition)) {
                 $query = call_user_func($condition, $query);
@@ -78,11 +88,11 @@ class ManageController extends Controller {
             }
 
             $modelsProvider = new ActiveDataProvider([
-                'query' => $query
+                'query' => $query,
             ]);
 
             return $this->render('index', [
-                'entity' => $entity,
+                'entity'         => $entity,
                 'modelsProvider' => $modelsProvider,
             ]);
         } else {
@@ -90,18 +100,20 @@ class ManageController extends Controller {
         }
     }
 
-    public function actionView() {
+    public function actionView()
+    {
         if (method_exists($this->entity, 'canRead') && $this->entity->canRead()) {
             return $this->render('view', [
                 'entity' => $this->entity,
-                'model' => $this->model,
+                'model'  => $this->model,
             ]);
         } else {
             throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
         }
     }
 
-    public function actionUpdate() {
+    public function actionUpdate()
+    {
         if (method_exists($this->entity, 'canUpdate') && $this->entity->canUpdate()) {
             /* @var Form $form */
             $form = Yii::createObject(ArrayHelper::merge([
@@ -128,15 +140,16 @@ class ManageController extends Controller {
             }
             return $this->render('update', [
                 'entity' => $this->entity,
-                'model' => $this->model,
-                'form' => $form,
+                'model'  => $this->model,
+                'form'   => $form,
             ]);
         } else {
             throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
         }
     }
 
-    public function actionDelete() {
+    public function actionDelete()
+    {
         if (method_exists($this->entity, 'canDelete') && $this->entity->canDelete()) {
             if (Yii::$app->getRequest()->getIsPost()) {
                 $transaction = Yii::$app->db->beginTransaction();
@@ -155,14 +168,15 @@ class ManageController extends Controller {
             }
             return $this->render('delete', [
                 'entity' => $this->entity,
-                'model' => $this->model,
+                'model'  => $this->model,
             ]);
         } else {
             throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
         }
     }
 
-    public function actionCreate() {
+    public function actionCreate()
+    {
         if (method_exists($this->entity, 'canCreate') && $this->entity->canCreate()) {
             $model = Yii::createObject($this->entity->model(), []);
             /* @var Form $form */
@@ -183,7 +197,7 @@ class ManageController extends Controller {
                         return $this->redirect([
                             'update',
                             'entity' => $this->entity->id,
-                            'id' => $form->model->primaryKey,
+                            'id'     => $form->model->primaryKey,
                         ]);
                     } else {
                         $form->afterFail();
@@ -196,8 +210,8 @@ class ManageController extends Controller {
 
             return $this->render('create', [
                 'entity' => $this->entity,
-                'model' => $model,
-                'form' => $form,
+                'model'  => $model,
+                'form'   => $form,
             ]);
         } else {
             throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
@@ -209,9 +223,10 @@ class ManageController extends Controller {
      * @throws \yii\web\BadRequestHttpException
      * @return ActiveRecord
      */
-    public function getModel() {
+    public function getModel()
+    {
         $entity = $this->entity;
-        $id = Yii::$app->getRequest()->getQueryParam('id', null);
+        $id     = Yii::$app->getRequest()->getQueryParam('id', null);
         if (!$id || !$entity) {
             throw new BadRequestHttpException();
         }
@@ -224,11 +239,14 @@ class ManageController extends Controller {
 
     /**
      * Load model
-     * @param Entity $entity
+     *
+     * @param Entity         $entity
      * @param string|integer $id
+     *
      * @return ActiveRecord mixed
      */
-    public function loadModel($entity, $id) {
+    public function loadModel($entity, $id)
+    {
         if ($this->_model) {
             return $this->_model;
         }
@@ -248,5 +266,4 @@ class ManageController extends Controller {
         $this->_model = $query->one();
         return $this->_model;
     }
-
 }

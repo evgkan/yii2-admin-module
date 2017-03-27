@@ -42,7 +42,7 @@ abstract class Entity extends Component {
      * @var array Labels
      */
     public $labels;
-
+    public $actions = [];
     /**
      * Primary key for model. MUST be unique.
      * Using for loading model from DB and URL generation.
@@ -220,5 +220,4 @@ abstract class Entity extends Component {
     public function canDelete() {
         return true;
     }
-
 }
