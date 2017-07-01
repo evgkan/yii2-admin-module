@@ -26,8 +26,7 @@ class FileInput extends Base
      */
     public function renderInput($value, $attribute = null)
     {
-        return Html::activeInput($this->type, $this->model, $attribute ? $attribute : $this->attribute, [
-            'class' => 'form-control',
-        ]);
+        Html::addCssClass($this->options, 'form-control');
+        return Html::activeInput($this->type, $this->model, $attribute ? $attribute : $this->attribute, $this->options);
     }
 }

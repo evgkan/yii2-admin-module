@@ -29,7 +29,7 @@ class AppendableList extends Base
      * Widget template
      * @var string
      */
-    public $template = '@vendor/asdf-studio/yii2-admin-module/views/widgets/appendable';
+    public $template = '@vendor/sgdot/yii2-admin-module/views/widgets/appendable';
 
     public function init()
     {

@@ -4,27 +4,18 @@
 namespace asdfstudio\admin\details;
 
 
+use Closure;
 use yii\widgets\DetailView;
 
-class Detail extends DetailView
-{
+class Detail extends DetailView {
+
     /**
      * @inheritdoc
      */
-    public function init()
-    {
-        if (empty($this->attributes)) {
-            $this->attributes = $this->attributes();
+    protected function renderAttribute($attribute, $index) {
+        if ($attribute['value'] instanceof Closure) {
+            $attribute['value'] = call_user_func($attribute['value'], $this->model, $index);
         }
-        parent::init();
-    }
-
-    /**
-     * List of attributes using in detail view
-     * @return array
-     */
-    public function attributes()
-    {
-        return null;
+        return parent::renderAttribute($attribute, $index);
     }
 }

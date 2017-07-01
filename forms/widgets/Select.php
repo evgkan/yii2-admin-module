@@ -62,15 +62,28 @@ class Select extends Base
         }
         parent::init();
     }
-
+    public function run() 
+    {
+        if (!$this->multiple) {
+            return parent::run();
+        } else {
+            $input = $this->renderInput($this->model->{$this->attribute}, $this->attribute);
+            $res = $this->appendable ? $this->wrapAppendable($input) : $input;
+        }
+        return $res;
+    }
     /**
      * @inheritdoc
      */
     public function renderInput($value, $attribute = null)
     {
-        return Html::activeDropDownList($this->model, $attribute ? $attribute : $this->attribute, $this->items, [
-            'class' => 'form-control',
-            'multiple' => $this->multiple,
-        ]);
+        $select_id = Html::getInputId($this->model, $attribute ? $attribute : $this->attribute);
+        $this->view->registerJs("$('#{$select_id}').selectpicker();");
+
+        Html::addCssClass($this->options, 'form-control');
+        if(!isset($this->options['multiple'])){
+            $this->options['multiple'] = $this->multiple;
+        }
+        return Html::activeDropDownList($this->model, $attribute ? $attribute : $this->attribute, $this->items, $this->options);
     }
 }

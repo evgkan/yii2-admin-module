@@ -1,18 +1,17 @@
 <?php
 
-
 namespace asdfstudio\admin\controllers;
 
-
+use Yii;
+use yii\web\ForbiddenHttpException;
 use yii\filters\AccessControl;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
+
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -30,8 +29,12 @@ class AdminController extends Controller
         ];
     }
 
-    public function actionIndex()
-    {
-        return $this->render('index');
+    public function actionIndex() {
+        if (method_exists($this->module, 'canRead') && $this->module->canRead()) {
+            return $this->render('index');
+        } else {
+            throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+        }
     }
+
 }

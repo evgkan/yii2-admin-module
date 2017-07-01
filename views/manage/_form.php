@@ -7,7 +7,7 @@ use yii\bootstrap\ActiveForm;
  * @var yii\db\ActiveRecord $model
  * @var asdfstudio\admin\forms\Form $form
  * @var asdfstudio\admin\base\Entity $entity
- * @var ActiveForm|\asdfstudio\admin\forms\Form $form
+ * @var ActiveForm $htmlForm
  */
 
 $fields = $form->fields();

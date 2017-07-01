@@ -2,7 +2,7 @@
 
 ##Usage
 
-First create module `admin` in your project's modules dir (e.g. `/path/to/project/frontent/modules/admin`). Then create class `Module` extending `asdfstudio\admin\Module`:
+First create module `admin` in your project's modules dir (e.g. `/path/to/project/frontend/modules/admin`). Then create class `Module` extending `asdfstudio\admin\Module`:
 
 ```php
 use asdfstudio\admin\Module as AdminModule;

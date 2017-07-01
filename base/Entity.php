@@ -1,8 +1,6 @@
 <?php
 
-
 namespace asdfstudio\admin\base;
-
 
 use asdfstudio\admin\forms\Form;
 use yii\base\Component;
@@ -15,33 +13,36 @@ use yii\widgets\DetailView;
  * Class Entity
  * @package asdfstudio\admin
  */
-abstract class Entity extends Component
-{
+abstract class Entity extends Component {
+
     /**
      * Triggers after new model creation
      */
-    const EVENT_CREATE_SUCCESS  = 'entity_create_success';
-    const EVENT_CREATE_FAIL     = 'entity_create_fail';
+    const EVENT_CREATE_SUCCESS = 'entity_create_success';
+    const EVENT_CREATE_FAIL = 'entity_create_fail';
+
     /**
      * Trigers after model updated
      */
-    const EVENT_UPDATE_SUCCESS  = 'entity_update_success';
-    const EVENT_UPDATE_FAIL     = 'entity_update_fail';
+    const EVENT_UPDATE_SUCCESS = 'entity_update_success';
+    const EVENT_UPDATE_FAIL = 'entity_update_fail';
+
     /**
      * Triggers after model deleted
      */
-    const EVENT_DELETE_SUCCESS  = 'entity_delete_success';
-    const EVENT_DELETE_FAIL     = 'entity_delete_fail';
+    const EVENT_DELETE_SUCCESS = 'entity_delete_success';
+    const EVENT_DELETE_FAIL = 'entity_delete_fail';
 
     /**
      * @var string Entity Id
      */
     public $id;
+
     /**
      * @var array Labels
      */
     public $labels;
-
+    public $actions = [];
     /**
      * Primary key for model. MUST be unique.
      * Using for loading model from DB and URL generation.
@@ -49,8 +50,7 @@ abstract class Entity extends Component
      *
      * @return string
      */
-    public function primaryKey()
-    {
+    public function primaryKey() {
         return 'id';
     }
 
@@ -63,7 +63,7 @@ abstract class Entity extends Component
      *
      * @return array
      */
-    public function labels() {
+    public static function labels() {
         $class = new ReflectionClass(static::className());
         $class = $class->getShortName();
 
@@ -80,7 +80,7 @@ abstract class Entity extends Component
      *
      * @return string
      */
-    public function slug() {
+    public static function slug() {
         return Inflector::slug(static::model());
     }
 
@@ -211,23 +211,19 @@ abstract class Entity extends Component
         ];
     }
 
-    /**
-     *
-     * Enable only include in array buttons. By default show all.
-     *  return [
-     *      'create',
-     *      'view',
-     *      'update',
-     *      'delete',
-     *  ];
-     * @return array
-     */
-    public function buttons(){
-        return [
-            'create',
-            'view',
-            'update',
-            'delete',
-        ];
+    public function canRead() {
+        return true;
+    }
+
+    public function canCreate() {
+        return true;
+    }
+
+    public function canUpdate() {
+        return true;
+    }
+
+    public function canDelete() {
+        return true;
     }
 }

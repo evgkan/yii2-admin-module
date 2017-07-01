@@ -2,7 +2,7 @@
 
 ##Использование
 
-Сперва создайте модуль `admin` в директории модулей своего проекта (например `/path/to/project/frontent/modules/admin`). Создайте класс `Module` расширяющий `asdfstudio\admin\Module`:
+Сперва создайте модуль `admin` в директории модулей своего проекта (например `/path/to/project/frontend/modules/admin`). Создайте класс `Module` расширяющий `asdfstudio\admin\Module`:
 
 ```php
 use asdfstudio\admin\Module as AdminModule;

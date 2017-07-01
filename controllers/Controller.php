@@ -1,8 +1,6 @@
 <?php
 
-
 namespace asdfstudio\admin\controllers;
-
 
 use asdfstudio\admin\base\Entity;
 use asdfstudio\admin\Module;
@@ -15,16 +13,15 @@ use yii\web\Controller as WebController;
  * @package asdfstudio\admin\controllers
  * @property Module $module
  */
-abstract class Controller extends WebController
-{
+abstract class Controller extends WebController {
+
     public $layout = 'main';
 
-    public function beforeAction($action)
-    {
+    public function beforeAction($action) {
         if (parent::beforeAction($action)) {
             $this->view->params['breadcrumbs'][] = [
                 'label' => \Yii::t('admin', 'Dashboard'),
-                'url' => ['admin/index'],
+                'url' => ['/admin/admin/index'],
             ];
             return true;
         }
@@ -36,8 +33,7 @@ abstract class Controller extends WebController
      * @param string $entity Entity name
      * @return Entity
      */
-    public function getEntity($entity)
-    {
+    public function getEntity($entity) {
         if (isset($this->module->entities[$entity])) {
             return $this->module->entities[$entity];
         } elseif (isset($this->module->entitiesClasses[$entity])) {
@@ -45,4 +41,5 @@ abstract class Controller extends WebController
         }
         return null;
     }
+
 }

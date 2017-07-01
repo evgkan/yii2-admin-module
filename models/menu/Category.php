@@ -3,13 +3,13 @@
 namespace asdfstudio\admin\models\menu;
 
 
-use yii\base\Model;
+use yii\base\Object;
 
 /**
  * Class Category
  * @package asdfstudio\admin\models\menu
  */
-class Category extends Model
+class Category extends Object
 {
     use ItemsCollectionTrait;
 
@@ -17,31 +17,6 @@ class Category extends Model
      * @var Category label
      */
     public $label;
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            ['label', 'string', 'length' => [1, 255]],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function beforeValidate()
-    {
-        if (parent::beforeValidate()) {
-            foreach ($this->items as $item) {
-                if (!$item->validate()) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
     /**
      * Render category into array

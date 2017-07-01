@@ -3,9 +3,9 @@
 namespace asdfstudio\admin\models\menu;
 
 
-use yii\base\Model;
+use yii\base\Object;
 
-class Menu extends Model
+class Menu extends Object
 {
     use ItemsCollectionTrait {
         addItem as addItemOriginal;
@@ -21,34 +21,6 @@ class Menu extends Model
      * @var array
      */
     protected $order = [];
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function beforeValidate()
-    {
-        if (parent::beforeValidate()) {
-            foreach ($this->categories as $category) {
-                if (!$category->validate()) {
-                    return false;
-                }
-            }
-            foreach ($this->items as $item) {
-                if (!$item->validate()) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
     public function addCategory($label)
     {

@@ -1,28 +1,33 @@
 {
-    "name": "asdf-studio/yii2-admin-module",
-    "description": "Admin module for Yii2 framework",
-    "license": "BSD-3-Clause",
-    "type": "yii2-extension",
-    "authors": [
-        {
-            "name": "Pavel Kilin",
-            "email": "pavel@asdf404.net"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {
-        "yiisoft/yii2": "*",
-        "yiisoft/yii2-bootstrap": "*",
-        "rmrevin/yii2-fontawesome": "2.2.1",
-        "cakebake/yii2-bootstrap-select": "*"
+  "name": "sgdot/yii2-admin-module",
+  "description": "Admin module for Yii2 framework",
+  "license": "BSD-3-Clause",
+  "homepage": "http://asdf-studio.net/docs/yii2-admin-module",
+  "type": "yii2-extension",
+  "authors": [
+    {
+      "name": "Pavel Kilin",
+      "email": "pavel@asdf404.net"
     },
-    "autoload": {
-        "psr-4": {
-            "asdfstudio\\admin\\": ""
-        }
-    },
-    "asset-installer-paths": {
-        "npm-asset-library": "vendor/npm",
-        "bower-asset-library": "vendor/bower"
+    {
+      "name": "Sergei Gulin",
+      "email": "gulin.sergei+github@ya.ru"
     }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "yiisoft/yii2": "*",
+    "yiisoft/yii2-bootstrap": "*",
+    "rmrevin/yii2-fontawesome": "2.2.1",
+    "cakebake/yii2-bootstrap-select": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "asdfstudio\\admin\\": ""
+    }
+  },
+  "asset-installer-paths": {
+    "npm-asset-library": "vendor/npm",
+    "bower-asset-library": "vendor/bower"
+  }
 }
