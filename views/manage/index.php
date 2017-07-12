@@ -30,13 +30,11 @@ $defaultGrid = [
 $grid = ArrayHelper::merge($defaultGrid, $grid);
 ?>
 
-<?php if(in_array('create', $entity->buttons())): ?>
 <div class="row">
     <div class="form-group">
         <?php echo Html::a(Yii::t('admin', 'Create'), ['create', 'entity' => $entity->id], ['class' => 'btn btn-success']) ?>
     </div>
 </div>
-<?php endif ?>
 
 <div class="row">
     <?= $class::widget($grid); ?>
