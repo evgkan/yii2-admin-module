@@ -35,11 +35,13 @@ $actions = $form->actions();
         <?php endforeach?>
     </div>
     <div class="col-md-2">
-        <!-- Render actions -->
-        <?php foreach($actions as $name => $action):?>
-            <?php if (isset($action['visible']) && !$action['visible']) continue?>
-            <?php echo $action['class']::widget(array_merge($action, ['name' => $name]))?>
-        <?php endforeach?>
+        <div class="affix">
+            <!-- Render actions -->
+            <?php foreach($actions as $name => $action):?>
+                <?php if (isset($action['visible']) && !$action['visible']) continue?>
+                <?php echo $action['class']::widget(array_merge($action, ['name' => $name]))?>
+            <?php endforeach?>
+        </div>
     </div>
     <?php ActiveForm::end()?>
 </div>
