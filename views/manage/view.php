@@ -27,21 +27,15 @@ $primaryKey = $entity->primaryKey();
 ?>
 <div class="model-view">
     <p>
-        <?php if(in_array('update', $entity->buttons())):
-        echo Html::a(Yii::t('admin', 'Edit'), ['update', 'entity' => $entity->id, 'id' => $model->{$primaryKey}], ['class' => 'btn btn-primary']);
-        endif
-        ?>
+        <?= Html::a(Yii::t('admin', 'Edit'), ['update', 'entity' => $entity->id, 'id' => $model->{$primaryKey}], ['class' => 'btn btn-primary']);?>
 
-        <?php if(in_array('delete', $entity->buttons())):
-        echo Html::a(Yii::t('admin', 'Delete'), ['delete', 'entity' => $entity->id, 'id' => $model->{$primaryKey}], [
+        <?= Html::a(Yii::t('admin', 'Delete'), ['delete', 'entity' => $entity->id, 'id' => $model->{$primaryKey}], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('admin', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
-        ]);
-        endif
-        ?>
+        ]);?>
     </p>
 
     <div class="row">
